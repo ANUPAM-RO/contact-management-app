@@ -39,7 +39,7 @@ const ContactForm: React.FC = () => {
         <Sidebar />
       </div>
       <div className="h-full w-full flex flex-col items-center mt-12">
-        <span className="text-2xl p-5">Create Contact Page</span>
+        <span className="text-2xl p-5">{editableContact.length ? 'Update Contact Page' : 'Create Contact Page'}</span>
       <form onSubmit={handleSubmit} className="border-solid border-2 border-gray-600 h-1/2 p-10">
         <div className="md:flex md:items-center mb-6">
           <div className="md:w-1/3">
@@ -60,7 +60,7 @@ const ContactForm: React.FC = () => {
         <div className="md:flex md:items-center mb-6">
           <div className="md:w-1/3">
             <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
-              Last Name:{" "}
+              Last Name:
             </label>
           </div>
           <div className="md:w-2/3">
@@ -77,7 +77,7 @@ const ContactForm: React.FC = () => {
           <div className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4 md:w-1/3">
             Staus:
           </div>
-          <div className="flex flex-col gap-4 md:w-2/3">
+          <div className="flex flex-col items-start gap-4 md:w-2/3">
             <div>
               <input
                 type="radio"

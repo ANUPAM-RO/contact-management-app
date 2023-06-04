@@ -40,64 +40,28 @@ const ContactList: React.FC = () => {
           <Link to="/add-contact">
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create Contact </button>
           </Link>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
         {contacts.map((contact) => (
           <div key={contact.id}>
-            {editingContactId === contact.id ? (
-              <>
-                <label>First Name: </label>
-                <input
-                  type="text"
-                  placeholder="First Name"
-                  value={fname}
-                  onChange={(e) => setFname(e.target.value)}
-                />
-                <label>Last Name: </label>
-                <input
-                  type="text"
-                  placeholder="Last Name"
-                  value={lname}
-                  onChange={(e) => setLname(e.target.value)}
-                />
-                <label>Staus: </label>
-                <label> Active </label>
-                <input
-                  type="radio"
-                  value="active"
-                  checked={status === "active"}
-                  onChange={(e) => setStatus(e.target.value)}
-                />
-                <label> Inactive </label>
-                <input
-                  type="radio"
-                  value="inactive"
-                  checked={status === "inactive"}
-                  onChange={(e) => setStatus(e.target.value)}
-                />
-  
-                <button onClick={() => handleSave(contact.id)}>Save Editted Contact </button>
-              </>
-            ) : (
                 <div >
                   <div className="border-solid border-2 border-gray-600 p-10 mb-5">
-                  <div className='text-blue-500 text-2xl'>First Name -
-                  <span className='text-green-500 font-bold text-2xl'> {contact.fname}</span>  
+                  <div className='text-blue-500 md:text-2xl'>First Name -
+                  <span className='text-green-500 font-bold md:text-2xl'> {contact.fname}</span>  
                   </div>
-                  <div className='text-blue-500 text-2xl'>Last Name -
-                  <span className='text-green-500 font-bold text-2xl'> {contact.lname}</span>  
+                  <div className='text-blue-500 md:text-2xl'>Last Name -
+                  <span className='text-green-500 font-bold md:text-2xl'> {contact.lname}</span>  
                   </div>
-                  <div className='text-blue-500 text-2xl'>Status -
-                  <span className='text-green-500 font-bold text-2xl'> {contact.status}</span>  
+                  <div className='text-blue-500 md:text-2xl'>Status -
+                  <span className='text-green-500 font-bold md:text-2xl'> {contact.status}</span>  
                   </div>
 
                   </div>
-                  <div className='flex flex-col gap-5'>
-                <button  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleEdit(contact.id)}>Edit</button>
-                    <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleDelete(contact.id)}>Delete</button>
+                  <div className='flex flex-col gap-5 items-center'>
+                    <button  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-32" onClick={() => handleEdit(contact.id)}>Edit</button>
+                    <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-32" onClick={() => handleDelete(contact.id)}>Delete</button>
                   </div>
               </div>
-            )}
           </div>
         ))}
             </div>
@@ -106,8 +70,11 @@ const ContactList: React.FC = () => {
           <Link to="/add-contact">
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create Contact </button>
           </Link>
-          <div className="border-solid border-2 border-gray-600 w-1/3">
-            <p className="font-bold text-orange-400">No contact Found Please add contact from create contact Button</p>
+          <div className="border-solid border-2 border-gray-600 w-1/3 p-5 flex justify-center items-center">
+            <div>
+              <img src='./cross.png' alt='' />
+            </div>
+            <p className="font-bold text-orange-400 text-xl">No contact Found Please add contact from create contact Button</p>
             </div>
         </div>
       }

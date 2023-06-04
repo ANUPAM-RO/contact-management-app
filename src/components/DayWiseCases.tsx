@@ -11,6 +11,8 @@ interface DayWiseData {
 const DayWiseCases: React.FC = () => {
   const [dayWiseData, setDayWiseData] = useState<DayWiseData | null>(null);
 
+  console.log(dayWiseData)
+
   useEffect(() => {
     axios
       .get("https://disease.sh/v3/covid-19/historical/all?lastdays=all")

@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Bar } from 'react-chartjs-2';
+import { Bar, Line } from 'react-chartjs-2';
 
 interface CountryData {
   country: string;
-  cases: number;
+  active: number;
   recovered: number;
   deaths: number;
 }
 
 const CountryWiseCases: React.FC = () => {
   const [countryData, setCountryData] = useState<CountryData[]>([]);
+
+  console.log(countryData)
 
   useEffect(() => {
     axios
@@ -31,8 +33,8 @@ const CountryWiseCases: React.FC = () => {
     labels: countryData.map((data) => data.country),
     datasets: [
       {
-        label: 'Total Cases',
-        data: countryData.map((data) => data.cases),
+        label: 'Active Cases',
+        data: countryData.map((data) => data.active),
         backgroundColor: 'rgba(255, 99, 132, 0.6)',
         borderWidth: 1,
       },
@@ -55,7 +57,7 @@ const CountryWiseCases: React.FC = () => {
     <div>
           <h1>COVID-19 Dashboard by Country</h1>
           <div>
-                  <Bar data={chartData} />
+                  <Line data={chartData} />
           </div>
   
     </div>
