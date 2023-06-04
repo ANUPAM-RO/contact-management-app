@@ -1,35 +1,28 @@
-// ContactList.tsx
-
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
 import { deleteContact, updateContact } from '../redux/actions';
 import Sidebar from './SideBar';
-import { Link} from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 const ContactList: React.FC = () => {
   const contacts = useSelector((state: RootState) => state.contacts);
-  const [editingContactId, setEditingContactId] = useState<number | null>(null);
+  const [editingContactId, setEditingContactId] = useState<string | null>(null);
   const [fname, setFname] = useState<string>('');
   const [lname, setLname] = useState<string>('');
   const [status, setStatus] = useState<string>('');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  console.log(contacts)
-
-  const handleDelete = (id: number) => {
+  const handleDelete = (id: string) => {
     dispatch(deleteContact(id));
   };
 
-  const handleEdit = (id: number) => {
-
-    setEditingContactId(id);
-    setFname('');
-    setLname('');
-    setStatus('');
+  const handleEdit = (id: string) => {
+    navigate(`/edit-contact/${id}`)
   };
 
-  const handleSave = (id: number) => {
+  const handleSave = (id: string) => {
     dispatch(updateContact({id, fname, lname, status}));
     setEditingContactId(null);
      setFname('');
@@ -100,9 +93,8 @@ const ContactList: React.FC = () => {
 
                   </div>
                   <div className='flex flex-col gap-5'>
-
                 <button  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleEdit(contact.id)}>Edit</button>
-                <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleDelete(contact.id)}>Delete</button>
+                    <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleDelete(contact.id)}>Delete</button>
                   </div>
               </div>
             )}

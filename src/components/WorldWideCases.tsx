@@ -46,9 +46,9 @@ const WorldWideCases: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className='w-full items-center justify-center flex flex-col gap-5'>
           <h1>COVID-19 Dashboard World Wide</h1>
-          <div >
+          <div className='w-2/3 '>
            <Pie data={chartData} />
               
           </div>

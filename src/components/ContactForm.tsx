@@ -1,19 +1,33 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addContact } from "../redux/actions";
+import { addContact, updateContact } from "../redux/actions";
 import Sidebar from "./SideBar";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+import {useParams } from 'react-router-dom';
 
 const ContactForm: React.FC = () => {
+  const contacts = useSelector((state: RootState) => state.contacts);
   const dispatch = useDispatch();
-  const [fname, setFname] = useState<string>("");
-  const [lname, setLname] = useState<string>("");
-  const [status, setStatus] = useState<string>("");
-  let id = Math.floor(Math.random() * 1000) + 1;
+  let {contactId} = useParams();
+  const editableContact =  contacts?.filter((data)=> data.id === contactId)
+  const [fname, setFname] = useState<string>(editableContact[0]?.fname || "");
+  const [lname, setLname] = useState<string>(editableContact[0]?.lname || "");
+  const [status, setStatus] = useState<string>(editableContact[0]?.status ||"");
+  let newId = Math.floor(Math.random() * 1000) + 1;
+ 
+  console.log(contacts)
+  
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(id, fname, lname, status);
-    dispatch(addContact({ id, fname, lname, status }));
+    if (contactId) {
+     const id =  contactId;
+      dispatch(updateContact({id , fname, lname, status}));
+    } else {
+       let id = newId.toString();
+      dispatch(addContact({ id, fname, lname, status }));
+    }
     setFname("");
     setLname("");
     setStatus("");
@@ -24,12 +38,13 @@ const ContactForm: React.FC = () => {
       <div>
         <Sidebar />
       </div>
-      <div className="ml-48 mt-10 border-solid border-2 border-gray-600 h-1/2 p-10">
-      <form onSubmit={handleSubmit} >
+      <div className="h-full w-full flex flex-col items-center mt-12">
+        <span className="text-2xl p-5">Create Contact Page</span>
+      <form onSubmit={handleSubmit} className="border-solid border-2 border-gray-600 h-1/2 p-10">
         <div className="md:flex md:items-center mb-6">
           <div className="md:w-1/3">
             <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
-              First Name:{" "}
+              First Name
             </label>
           </div>
           <div className="md:w-2/3">
@@ -87,8 +102,9 @@ const ContactForm: React.FC = () => {
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           type="submit"
-        >
-          Save Contact
+          >
+            {editableContact.length ? 'Save Editted Contact' : ' Save Contact'}
+         
         </button>
       </form>
 

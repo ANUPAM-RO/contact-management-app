@@ -1,6 +1,6 @@
 import {ActionType} from './action-types'
 export interface Contact {
-  id: number;
+  id: string;
   fname: string;
   lname: string;
   status: string;
@@ -13,7 +13,7 @@ export interface AddContactAction {
 
 export interface DeleteContactAction {
   type: ActionType.DELETE_CONTACT;
-  payload: number;
+  payload: string;
 }
 export interface UpdateContactAction {
   type: ActionType.UPDATE_CONTACT,
